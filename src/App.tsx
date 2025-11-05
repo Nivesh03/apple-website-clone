@@ -1,9 +1,13 @@
-import { Navbar } from "./components/navbar"
+import { Hero } from './components/hero'
+import { Navbar } from './components/navbar'
+import { ProductViewer } from './components/product-viewer'
 
 const App = () => {
   return (
     <main>
-      <Navbar/>
+      <Navbar />
+      <Hero />
+      <ProductViewer />
     </main>
   )
 }

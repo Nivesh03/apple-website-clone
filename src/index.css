@@ -1,23 +1,23 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @font-face {
-  font-family: "Regular";
-  src: url("/fonts/regular.otf");
+  font-family: 'Regular';
+  src: url('/fonts/regular.otf');
 }
 
 @font-face {
-  font-family: "Medium";
-  src: url("/fonts/medium.otf");
+  font-family: 'Medium';
+  src: url('/fonts/medium.otf');
 }
 
 @font-face {
-  font-family: "SemiBold";
-  src: url("/fonts/semibold.otf");
+  font-family: 'SemiBold';
+  src: url('/fonts/semibold.otf');
 }
 
 @font-face {
-  font-family: "Bold";
-  src: url("/fonts/bold.otf");
+  font-family: 'Bold';
+  src: url('/fonts/bold.otf');
 }
 
 * {
@@ -35,10 +35,10 @@
 }
 
 @theme {
-  --font-regular: "Regular";
-  --font-medium: "Medium";
-  --font-semibold: "SemiBold";
-  --font-bold: "Bold";
+  --font-regular: 'Regular';
+  --font-medium: 'Medium';
+  --font-semibold: 'SemiBold';
+  --font-bold: 'Bold';
   --color-primary: #0071e3;
   --color-dark-100: #86868b;
   --color-dark-200: #2e2e30;
@@ -176,7 +176,7 @@ body {
     }
 
     #canvas {
-      @apply !w-full !h-[80vh] lg:!h-dvh relative z-40;
+      @apply w-full! h-[80vh]! lg:h-dvh! relative z-40;
     }
   }
 
@@ -231,26 +231,26 @@ body {
     }
 
     .wrapper {
-      @apply w-7xl 2xl:w-[100rem] h-[50vh] lg:h-screen relative;
+      @apply w-7xl 2xl:w-400 h-[50vh] lg:h-screen relative;
 
       img {
-        @apply max-w-40 lg:max-w-[27rem] 2xl:max-w-[35rem] object-cover object-center;
+        @apply max-w-40 lg:max-w-108 2xl:max-w-140 object-cover object-center;
       }
 
       .p1 {
-        @apply absolute bottom-1/2 left-[23%] z-[1] max-sm:left-[33%];
+        @apply absolute bottom-1/2 left-[23%] z-1 max-sm:left-[33%];
       }
 
       .p2 {
-        @apply absolute bottom-[40%] right-[17%] z-[3] max-sm:right-[37%];
+        @apply absolute bottom-[40%] right-[17%] z-3 max-sm:right-[37%];
       }
 
       .p3 {
-        @apply absolute bottom-1/4 right-[15%] z-[2] max-sm:right-[35%];
+        @apply absolute bottom-1/4 right-[15%] z-2 max-sm:right-[35%];
       }
 
       .p4 {
-        @apply absolute bottom-[15%] right-[10%] z-[1] max-sm:right-[30%];
+        @apply absolute bottom-[15%] right-[10%] z-1 max-sm:right-[30%];
       }
 
       .p5 {
@@ -258,11 +258,11 @@ body {
       }
 
       .p6 {
-        @apply absolute bottom-1/4 left-1/4 z-[2] max-sm:left-[35%];
+        @apply absolute bottom-1/4 left-1/4 z-2 max-sm:left-[35%];
       }
 
       .p7 {
-        @apply absolute bottom-[5%] left-[15%] z-[3] max-sm:left-[35%];
+        @apply absolute bottom-[5%] left-[15%] z-3 max-sm:left-[35%];
       }
     }
 
@@ -283,7 +283,7 @@ body {
     }
 
     #f-canvas {
-      @apply !w-full !h-dvh relative z-40;
+      @apply w-full! h-dvh! relative z-40;
     }
 
     .box {
@@ -347,7 +347,7 @@ body {
           border: 3px solid transparent; /* !important */
 
           ::before {
-            content: "";
+            content: '';
             pointer-events: none;
             position: absolute;
             inset: 0px;
