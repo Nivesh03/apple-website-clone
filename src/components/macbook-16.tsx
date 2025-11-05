@@ -57,6 +57,8 @@ export function Macbook16Model(props: JSX.IntrinsicElements['group']) {
   ) as GLTFResult
 
   const texture = useTexture('/screen.png')
+  texture.colorSpace = THREE.SRGBColorSpace
+  texture.needsUpdate = true
   const { color } = useMacbookStore()
   useEffect(() => {
     scene.traverse((child) => {
@@ -156,7 +158,6 @@ export function Macbook16Model(props: JSX.IntrinsicElements['group']) {
       />
       <mesh
         geometry={nodes.Object_123.geometry}
-        material={materials.sfCQkHOWyrsLmor}
         rotation={[Math.PI / 2, 0, 0]}
       >
         <meshBasicMaterial map={texture} />
