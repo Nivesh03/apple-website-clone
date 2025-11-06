@@ -1,5 +1,5 @@
 import { useGLTF, useVideoTexture } from '@react-three/drei'
-import { useEffect } from 'react'
+import { useEffect, type JSX } from 'react'
 import * as THREE from 'three'
 import type { GLTF } from 'three-stdlib'
 import { noChangeParts } from '../../constants'
@@ -48,13 +48,12 @@ type GLTFResult = GLTF & {
     sfCQkHOWyrsLmor: THREE.MeshStandardMaterial
     ZCDwChwkbBfITSW: THREE.MeshStandardMaterial
   }
-  animations: GLTFAction[]
 }
 
 export function MacbookModel(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials, scene } = useGLTF(
     '/models/macbook-transformed.glb',
-  ) as GLTFResult
+  ) as unknown as GLTFResult
 
   const { color, texture } = useMacbookStore()
   const screen = useVideoTexture(texture)
