@@ -6,8 +6,8 @@ import {
 import gsap from 'gsap'
 import { useRef } from 'react'
 import { Group, Mesh } from 'three'
-import { Macbook14Model } from '../macbook-14'
-import { Macbook16Model } from '../macbook-16'
+import { Macbook14Model } from '../models/macbook-14'
+import { Macbook16Model } from '../models/macbook-16'
 const ANIMATION_DURATION = 1
 const OFFSET_DISTANCE = 5
 const SCALE_LARGE_DESKTOP = 0.08

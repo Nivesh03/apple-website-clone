@@ -1,9 +1,9 @@
-import { useGLTF, useTexture } from '@react-three/drei'
+import { useGLTF, useVideoTexture } from '@react-three/drei'
 import { useEffect } from 'react'
 import * as THREE from 'three'
 import type { GLTF } from 'three-stdlib'
-import { noChangeParts } from '../constants'
-import { useMacbookStore } from '../store'
+import { noChangeParts } from '../../constants'
+import { useMacbookStore } from '../../store'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -51,15 +51,13 @@ type GLTFResult = GLTF & {
   animations: GLTFAction[]
 }
 
-export function Macbook14Model(props: JSX.IntrinsicElements['group']) {
+export function MacbookModel(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials, scene } = useGLTF(
-    '/models/macbook-14-transformed.glb',
+    '/models/macbook-transformed.glb',
   ) as GLTFResult
 
-  const texture = useTexture('/screen.png')
-  texture.colorSpace = THREE.SRGBColorSpace
-  texture.needsUpdate = true
-  const { color } = useMacbookStore()
+  const { color, texture } = useMacbookStore()
+  const screen = useVideoTexture(texture)
   useEffect(() => {
     scene.traverse((child) => {
       if (child instanceof THREE.Mesh)
@@ -70,6 +68,7 @@ export function Macbook14Model(props: JSX.IntrinsicElements['group']) {
         }
     })
   }, [color, scene])
+
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -157,11 +156,8 @@ export function Macbook14Model(props: JSX.IntrinsicElements['group']) {
         material={materials.JvMFZolVCdpPqjj}
         rotation={[Math.PI / 2, 0, 0]}
       />
-      <mesh
-        geometry={nodes.Object_123.geometry}
-        rotation={[Math.PI / 2, 0, 0]}
-      >
-        <meshBasicMaterial map={texture} />
+      <mesh geometry={nodes.Object_123.geometry} rotation={[Math.PI / 2, 0, 0]}>
+        <meshBasicMaterial map={screen} />
       </mesh>
       <mesh
         geometry={nodes.Object_127.geometry}
@@ -172,4 +168,4 @@ export function Macbook14Model(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/models/macbook-14-transformed.glb')
+useGLTF.preload('/models/macbook-transformed.glb')

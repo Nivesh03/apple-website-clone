@@ -2,8 +2,9 @@ import { useGLTF, useTexture } from '@react-three/drei'
 import { useEffect } from 'react'
 import * as THREE from 'three'
 import type { GLTF } from 'three-stdlib'
-import { noChangeParts } from '../constants'
-import { useMacbookStore } from '../store'
+import { noChangeParts } from '../../constants'
+import { useMacbookStore } from '../../store'
+
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -51,9 +52,9 @@ type GLTFResult = GLTF & {
   animations: GLTFAction[]
 }
 
-export function Macbook16Model(props: JSX.IntrinsicElements['group']) {
+export function Macbook14Model(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials, scene } = useGLTF(
-    '/models/macbook-16-transformed.glb',
+    '/models/macbook-14-transformed.glb',
   ) as GLTFResult
 
   const texture = useTexture('/screen.png')
@@ -62,11 +63,12 @@ export function Macbook16Model(props: JSX.IntrinsicElements['group']) {
   const { color } = useMacbookStore()
   useEffect(() => {
     scene.traverse((child) => {
-      if (child.isMesh) {
-        if (!noChangeParts.includes(child.name)) {
-          child.material.color = new THREE.Color(color)
+      if (child instanceof THREE.Mesh)
+        if (child.isMesh) {
+          if (!noChangeParts.includes(child.name)) {
+            child.material.color = new THREE.Color(color)
+          }
         }
-      }
     })
   }, [color, scene])
   return (
@@ -156,10 +158,7 @@ export function Macbook16Model(props: JSX.IntrinsicElements['group']) {
         material={materials.JvMFZolVCdpPqjj}
         rotation={[Math.PI / 2, 0, 0]}
       />
-      <mesh
-        geometry={nodes.Object_123.geometry}
-        rotation={[Math.PI / 2, 0, 0]}
-      >
+      <mesh geometry={nodes.Object_123.geometry} rotation={[Math.PI / 2, 0, 0]}>
         <meshBasicMaterial map={texture} />
       </mesh>
       <mesh
@@ -171,4 +170,4 @@ export function Macbook16Model(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/models/macbook-16-transformed.glb')
+useGLTF.preload('/models/macbook-14-transformed.glb')

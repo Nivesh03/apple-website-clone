@@ -1,6 +1,9 @@
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, useTexture } from '@react-three/drei'
+import { useEffect } from 'react'
 import * as THREE from 'three'
 import type { GLTF } from 'three-stdlib'
+import { noChangeParts } from '../../constants'
+import { useMacbookStore } from '../../store'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -48,10 +51,25 @@ type GLTFResult = GLTF & {
   animations: GLTFAction[]
 }
 
-export function MacbookModel(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF(
-    '/models/macbook-transformed.glb',
+export function Macbook16Model(props: JSX.IntrinsicElements['group']) {
+  const { nodes, materials, scene } = useGLTF(
+    '/models/macbook-16-transformed.glb',
   ) as GLTFResult
+
+  const texture = useTexture('/screen.png')
+  texture.colorSpace = THREE.SRGBColorSpace
+  texture.needsUpdate = true
+  const { color } = useMacbookStore()
+  useEffect(() => {
+    scene.traverse((child) => {
+      if (child instanceof THREE.Mesh)
+        if (child.isMesh) {
+          if (!noChangeParts.includes(child.name)) {
+            child.material.color = new THREE.Color(color)
+          }
+        }
+    })
+  }, [color, scene])
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -139,11 +157,9 @@ export function MacbookModel(props: JSX.IntrinsicElements['group']) {
         material={materials.JvMFZolVCdpPqjj}
         rotation={[Math.PI / 2, 0, 0]}
       />
-      <mesh
-        geometry={nodes.Object_123.geometry}
-        material={materials.sfCQkHOWyrsLmor}
-        rotation={[Math.PI / 2, 0, 0]}
-      />
+      <mesh geometry={nodes.Object_123.geometry} rotation={[Math.PI / 2, 0, 0]}>
+        <meshBasicMaterial map={texture} />
+      </mesh>
       <mesh
         geometry={nodes.Object_127.geometry}
         material={materials.ZCDwChwkbBfITSW}
@@ -153,4 +169,4 @@ export function MacbookModel(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/models/macbook-transformed.glb')
+useGLTF.preload('/models/macbook-16-transformed.glb')
